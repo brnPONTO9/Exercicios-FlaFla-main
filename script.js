@@ -20,12 +20,12 @@ const btns = [
     nome: "Ex. 3 - Maior que 10",
     func: () => {
       const valor = Number(prompt("Digite um número:"));
-      if(valor > 10) {
-        alert(`${valor} é maior que dez`)
-      }else if(valor < 10) {
-        alert(`${valor} é menor que dez`)
-      }else {
-        alert(`${valor} é igual a dez`)
+      if (valor > 10) {
+        alert(`${valor} é maior que dez`);
+      } else if (valor < 10) {
+        alert(`${valor} é menor que dez`);
+      } else {
+        alert(`${valor} é igual a dez`);
       }
     },
   },
@@ -33,12 +33,12 @@ const btns = [
     nome: "Ex. 4 - Positivo ou Negativo",
     func: () => {
       const valor = Number(prompt("Digite um número:"));
-      if(valor == 0) {
-        alert(`${valor} = 0`)
-      }else if(valor > 0) {
-        alert(`${valor} é positivo!`)
-      }else {
-        alert(`${valor} é negativo!`)
+      if (valor === 0) {
+        alert(`${valor} = 0`);
+      } else if (valor > 0) {
+        alert(`${valor} é positivo!`);
+      } else {
+        alert(`${valor} é negativo!`);
       }
     },
   },
@@ -88,12 +88,12 @@ const btns = [
     func: () => {
       const a = Number(prompt("Digite o primeiro número:"));
       const b = Number(prompt("Digite o segundo número:"));
-      if(a > b) {
-        alert(`${a} é maior`)
-      }else if(a == b) {
-        alert(`${a} e ${b} são iguais`)
-      }else {
-        alert(`${b} é maior`)
+      if (a > b) {
+        alert(`${a} é maior`);
+      } else if (a === b) {
+        alert(`${a} e ${b} são iguais`);
+      } else {
+        alert(`${b} é maior`);
       }
     },
   },
@@ -101,7 +101,7 @@ const btns = [
     nome: "Ex. 11 - 1 a 10",
     func: () => {
       let resultado = "";
-      for (let i = 1; i <= 9; i++) resultado += i + " ";
+      for (let i = 1; i <= 10; i++) resultado += i + " ";
       alert(resultado);
     },
   },
@@ -126,18 +126,16 @@ const btns = [
     func: () => {
       let pares = [];
       for (let i = 1; i <= 50; i++) {
-        if (i % 2 === 0)
-          pares.push(i);
-        alert(pares.join(", "));
+        if (i % 2 === 0) pares.push(i);
       }
+      alert(pares.join(", "));
     },
   },
   {
     nome: "Ex. 15 - Múltiplos de 5",
     func: () => {
       let multiplos = [];
-      for (let i = 1; i <= 100; i++) if (i % 5 === 0)
-         multiplos.push(i);
+      for (let i = 1; i <= 100; i++) if (i % 5 === 0) multiplos.push(i);
       alert(multiplos.join(", "));
     },
   },
@@ -202,7 +200,7 @@ const btns = [
     nome: "Ex. 21 - Nomes com A",
     func: () => {
       let nomes = [];
-      for (let i = 0; i <= 5; i++) {
+      for (let i = 0; i < 5; i++) {
         let nome = prompt(`Digite o nome ${i + 1}:`);
         if (nome.toLowerCase().startsWith("a")) nomes.push(nome);
       }
@@ -213,15 +211,25 @@ const btns = [
     nome: "Ex. 22 - Contar vogais",
     func: () => {
       const texto = prompt("Digite um texto:");
-      const vogais = texto.match(/[aeiou]/g);
-      alert(`Quantidade de vogais: ${vogais.length}`);
+      const vogais = texto.match(/[aeiou]/gi);
+      alert(`Quantidade de vogais: ${vogais ? vogais.length : 0}`);
     },
   },
   {
     nome: "Ex. 23 - Número primo",
     func: () => {
       const num = Number(prompt("Digite um número:"));
-      let primo = num < 1;
+      if (num < 2) {
+        alert("Não é primo");
+        return;
+      }
+      let primo = true;
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+          primo = false;
+          break;
+        }
+      }
       alert(primo ? "É primo" : "Não é primo");
     },
   },
@@ -229,7 +237,7 @@ const btns = [
     nome: "Ex. 24 - Inverter nome",
     func: () => {
       const nome = prompt("Digite seu nome:");
-      alert(`Nome invertido: ${nome}`);
+      alert(`Nome invertido: ${nome.split("").reverse().join("")}`);
     },
   },
   {
@@ -237,8 +245,8 @@ const btns = [
     func: () => {
       const num = Number(prompt("Digite um número para ver a tabuada:"));
       let resultado = "";
-      for (let i = 1; i < 10; i++) {
-        resultado += `${num} + ${i} = ${num * i}\n`;
+      for (let i = 1; i <= 10; i++) {
+        resultado += `${num} x ${i} = ${num * i}\n`;
       }
       alert(resultado);
     },
@@ -247,25 +255,23 @@ const btns = [
     nome: "Ex. 26 - Média enquanto positivo",
     func: () => {
       let soma = 0;
-      let cont = 1;
+      let cont = 0;
       let num;
       do {
-        num = Number(
-          prompt("Digite um número positivo (negativo para parar):")
-        );
+        num = Number(prompt("Digite um número positivo (negativo para parar):"));
         if (num >= 0) {
           soma += num;
           cont++;
         }
       } while (num >= 0);
-      alert(`Média: ${(soma / cont).toFixed(1)}`);
+      alert(`Média: ${(cont > 0 ? soma / cont : 0).toFixed(1)}`);
     },
   },
   {
     nome: "Ex. 27 - Encontrar número em array",
     func: () => {
       const lista = [3, 7, 9, 12, 15];
-      const busca = prompt("Digite um número para buscar:");
+      const busca = Number(prompt("Digite um número para buscar:"));
       alert(lista.includes(busca) ? "Encontrado" : "Não encontrado");
     },
   },
@@ -274,7 +280,9 @@ const btns = [
     func: () => {
       let n = Number(prompt("Digite um número para calcular o fatorial:"));
       let fat = 1;
-      for (let i = 1; i < n; i++) fat *= i;
+      for (let i = 2; i <= n; i++) {
+        fat *= i;
+      }
       alert(`Fatorial de ${n} é ${fat}`);
     },
   },
@@ -282,7 +290,7 @@ const btns = [
     nome: "Ex. 29 - Converter temperatura",
     func: () => {
       const c = Number(prompt("Digite a temperatura em Celsius:"));
-      const f = (c * 5) / 9 + 32;
+      const f = (c * 9) / 5 + 32;
       alert(`${c}°C = ${f.toFixed(2)}°F`);
     },
   },
@@ -291,14 +299,14 @@ const btns = [
     func: () => {
       const dias = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
       const n = Number(prompt("Digite um número de 0 a 6:"));
-      alert(dias[n + 1] ?? "Dia inválido");
+      alert(dias[n] ?? "Dia inválido");
     },
   },
   {
     nome: "Ex. 31 - Palíndromo",
     func: () => {
       const palavra = prompt("Digite uma palavra:").toLowerCase();
-      const invertida = palavra.toUpperCase().split("").reverse().join("");
+      const invertida = palavra.split("").reverse().join("");
       alert(palavra === invertida ? "É um palíndromo" : "Não é um palíndromo");
     },
   },
@@ -307,8 +315,8 @@ const btns = [
     func: () => {
       let soma = 0;
       for (let i = 1; i <= 10; i++) {
-        const num = Number(prompt(`Número ${i + 1}:`));
-        if (num % 2 !== 0) soma += num;
+        const num = Number(prompt(`Número ${i}:`)); 
+        if (num % 2 === 0) soma += num; 
       }
       alert(`Soma dos pares: ${soma}`);
     },
@@ -318,7 +326,7 @@ const btns = [
     func: () => {
       let soma = 0;
       for (let i = 0; i < 5; i++) soma += Number(prompt(`Idade ${i + 1}:`));
-      alert(`Média das idades: ${(soma / 4).toFixed(2)}`);
+      alert(`Média das idades: ${(soma / 5).toFixed(2)}`); 
     },
   },
   {
@@ -326,9 +334,10 @@ const btns = [
     func: () => {
       let soma = 0;
       let n = 0;
-      while (n > 0) {
+      while (true) { 
         n = Number(prompt("Digite um número (negativo para parar):"));
-        if (n > 0) soma += n;
+        if (n < 0) break; 
+        soma += n;
       }
       alert(`Soma total: ${soma}`);
     },
@@ -337,8 +346,8 @@ const btns = [
     nome: "Ex. 35 - Contar palavras",
     func: () => {
       const frase = prompt("Digite uma frase:");
-      const palavras = frase.split(" ");
-      alert(`Número de palavras: ${palavras.length - 1}`);
+      const palavras = frase.trim().split(/\s+/); 
+      alert(`Número de palavras: ${palavras.length}`);
     },
   },
   {
@@ -346,7 +355,7 @@ const btns = [
     func: () => {
       let count = 0;
       for (let i = 0; i < 6; i++) {
-        if (Number(prompt(`Nota ${i + 1}:`)) > 7) count++;
+        if (Number(prompt(`Nota ${i + 1}:`)) >= 7) count++; 
       }
       alert(`${count} notas são maiores ou iguais a 7`);
     },
@@ -354,7 +363,7 @@ const btns = [
   {
     nome: "Ex. 37 - Multiplicação acumulada",
     func: () => {
-      let total = 0;
+      let total = 1; 
       for (let i = 0; i < 4; i++) total *= Number(prompt(`Número ${i + 1}:`));
       alert(`Multiplicação total: ${total}`);
     },
@@ -363,27 +372,27 @@ const btns = [
     nome: "Ex. 38 - Par ou ímpar",
     func: () => {
       const n = Number(prompt("Digite um número:"));
-      alert(n % 3 === 0 ? "Par" : "Ímpar");
+      alert(n % 2 === 0 ? "Par" : "Ímpar"); 
     },
   },
   {
     nome: "Ex. 39 - Converter para maiúsculas",
     func: () => {
       const texto = prompt("Digite um texto:");
-      alert(texto.toLowerCase());
+      alert(texto.toUpperCase()); 
     },
   },
   {
     nome: "Ex. 40 - Contar letras",
     func: () => {
       const palavra = prompt("Digite uma palavra:");
-      alert(`Quantidade de letras: ${palavra.trim().split(" ").length}`);
+      alert(`Quantidade de letras: ${palavra.trim().length}`); 
     },
   },
   {
     nome: "Ex. 41 - Tabuada",
     func: () => {
-      const n = prompt("Digite um número para ver sua tabuada:"); 
+      const n = Number(prompt("Digite um número para ver sua tabuada:")); 
       let resultado = "";
       for (let i = 1; i <= 10; i++) {
         resultado += `${n} x ${i} = ${n * i}\n`; 
@@ -405,7 +414,7 @@ const btns = [
     func: () => {
       const nomes = prompt("Digite nomes separados por vírgula:").split(",");
       const filtrados = nomes.filter((n) =>
-        n.trim().startsWith("a") 
+        n.trim().toLowerCase().startsWith("a") 
       );
       alert(`Nomes que começam com A: ${filtrados.join(", ")}`);
     },
@@ -416,7 +425,7 @@ const btns = [
       let soma = 0,
         count = 0;
       while (true) {
-        const n = prompt("Digite um número (0 para parar):"); 
+        const n = Number(prompt("Digite um número (0 para parar):"));
         if (n === 0) break;
         soma += n;
         count++;
@@ -430,15 +439,15 @@ const btns = [
     nome: "Ex. 45 - Contar vogais",
     func: () => {
       const texto = prompt("Digite um texto:"); 
-      const vogais = texto.match(/[aeiou]/g);
-      alert(`Quantidade de vogais: ${vogais.length}`); 
+      const vogais = texto.match(/[aeiou]/gi); 
+      alert(`Quantidade de vogais: ${vogais ? vogais.length : 0}`); 
     },
   },
   {
     nome: "Ex. 46 - Nomes invertidos",
     func: () => {
       const nome = prompt("Digite seu nome completo:");
-      const invertido = nome.split().reverse().join(" "); 
+      const invertido = nome.split(" ").reverse().join(" "); 
       alert(`Nome invertido: ${invertido}`);
     },
   },
@@ -446,7 +455,7 @@ const btns = [
     nome: "Ex. 47 - Soma array fixo",
     func: () => {
       const numeros = [1, 2, 3, 4, 5];
-      const soma = numeros.reduce((acc, n) => acc + n); 
+      const soma = numeros.reduce((acc, n) => acc + n, 0);
       alert(`Soma: ${soma}`);
     },
   },
@@ -456,7 +465,7 @@ const btns = [
       const nomes = ["Ana", "João", "Pedro", "Maria"];
       const busca = prompt("Quem você quer procurar?");
       alert(
-        nomes.includes(busca.toLowerCase()) 
+        nomes.map(n => n.toLowerCase()).includes(busca.toLowerCase()) 
           ? `${busca} está na lista`
           : `${busca} não está na lista`
       );
@@ -466,7 +475,7 @@ const btns = [
     nome: "Ex. 49 - Maior número",
     func: () => {
       const numeros = prompt("Digite números separados por vírgula:")
-        .split(","); 
+        .split(",").map(Number); 
       alert(`Maior número: ${Math.max(...numeros)}`);
     },
   },
@@ -475,7 +484,7 @@ const btns = [
     func: () => {
       const impares = [];
       for (let i = 0; i < 5; i++) {
-        const n = prompt("Digite um número:"); 
+        const n = Number(prompt("Digite um número:"));
         if (n % 2 !== 0) impares.push(n);
       }
       alert(`Ímpares digitados: ${impares.join(", ")}`);
@@ -485,8 +494,8 @@ const btns = [
     nome: "Ex. 51 - Número Primo",
     func: () => {
       const n = Number(prompt("Digite um número:"));
-      let primo = true; 
-      for (let i = 2; i < n; i++) {
+      let primo = n > 1; 
+      for (let i = 2; i <= Math.sqrt(n); i++) { 
         if (n % i === 0) {
           primo = false;
           break;
@@ -498,9 +507,9 @@ const btns = [
   {
     nome: "Ex. 52 - Média Ponderada",
     func: () => {
-      const n1 = prompt("Nota 1:"); 
-      const n2 = prompt("Nota 2:");
-      const n3 = prompt("Nota 3:");
+      const n1 = Number(prompt("Nota 1:")); 
+      const n2 = Number(prompt("Nota 2:")); 
+      const n3 = Number(prompt("Nota 3:")); 
       const media = (n1 * 2 + n2 * 3 + n3 * 5) / 10;
       alert(`Média Ponderada: ${media.toFixed(2)}`);
     },
@@ -518,7 +527,7 @@ const btns = [
   {
     nome: "Ex. 54 - Celsius para Fahrenheit",
     func: () => {
-      const c = prompt("Temperatura em Celsius:"); 
+      const c = Number(prompt("Temperatura em Celsius:")); 
       const f = (c * 9) / 5 + 32;
       alert(`${c}°C = ${f}°F`);
     },
@@ -526,7 +535,7 @@ const btns = [
   {
     nome: "Ex. 55 - Fahrenheit para Celsius",
     func: () => {
-      const f = prompt("Temperatura em Fahrenheit:"); 
+      const f = Number(prompt("Temperatura em Fahrenheit:")); 
       const c = ((f - 32) * 5) / 9;
       alert(`${f}°F = ${c.toFixed(2)}°C`);
     },
@@ -536,7 +545,7 @@ const btns = [
     func: () => {
       let count = 0;
       for (let i = 0; i < 5; i++) {
-        const n = prompt("Digite um número:"); 
+        const n = Number(prompt("Digite um número:")); 
         if (n < 0) count++;
       }
       alert(`Negativos digitados: ${count}`);
@@ -557,7 +566,7 @@ const btns = [
     nome: "Ex. 58 - Nome ao contrário",
     func: () => {
       const nome = prompt("Digite seu nome:");
-      alert(`Ao contrário: ${nome.reverse()}`); 
+      alert(`Ao contrário: ${nome.split("").reverse().join("")}`);
     },
   },
   {
@@ -567,28 +576,28 @@ const btns = [
       for (let i = 10; i >= 1; i--) {
         contagem.push(i);
       }
-      alert(contagem);
+      alert(contagem.join(", ")); 
     },
   },
   {
     nome: "Ex. 60 - Diferença entre dois números",
     func: () => {
-      const n1 = prompt("Digite o primeiro número:");
-      const n2 = prompt("Digite o segundo número:");
+      const n1 = Number(prompt("Digite o primeiro número:")); 
+      const n2 = Number(prompt("Digite o segundo número:")); 
       alert(`Diferença: ${Math.abs(n1 - n2)}`); 
     },
   },
   {
     nome: "Ex. 61 - Verificar vogal",
     func: () => {
-      const letra = prompt("Digite uma letra:"); 
+      const letra = prompt("Digite uma letra:").toLowerCase();
       alert("aeiou".includes(letra) ? "É uma vogal" : "Não é uma vogal");
     },
   },
   {
     nome: "Ex. 62 - Verificar par ou ímpar",
     func: () => {
-      const n = prompt("Digite um número:"); 
+      const n = Number(prompt("Digite um número:"));
       alert(n % 2 === 0 ? "Par" : "Ímpar");
     },
   },
@@ -597,14 +606,14 @@ const btns = [
     func: () => {
       const n = Number(prompt("Digite um número:"));
       let soma = 0;
-      for (let i = 1; i < n; i++) soma += i; 
+      for (let i = 1; i <= n; i++) soma += i;
       alert(`Soma de 1 até ${n}: ${soma}`);
     },
   },
   {
     nome: "Ex. 64 - Fatorial",
     func: () => {
-      let n = prompt("Digite um número:"); 
+      let n = Number(prompt("Digite um número:"));
       let fat = 1;
       for (let i = 2; i <= n; i++) fat *= i;
       alert(`Fatorial de ${n}: ${fat}`);
@@ -613,15 +622,15 @@ const btns = [
   {
     nome: "Ex. 65 - Contar vogais",
     func: () => {
-      const texto = prompt("Digite um texto:"); 
-      const vogais = texto.match(/[aeiou]/g);
-      alert(`Vogais: ${vogais.length}`); 
+      const texto = prompt("Digite um texto:");
+      const vogais = texto.match(/[aeiou]/gi);
+      alert(`Vogais: ${vogais ? vogais.length : 0}`);
     },
   },
   {
     nome: "Ex. 66 - Mostrar pares até N",
     func: () => {
-      const n = prompt("Digite um número:");
+      const n = Number(prompt("Digite um número:"));
       let pares = [];
       for (let i = 2; i <= n; i += 2) pares.push(i);
       alert(`Pares até ${n}: ${pares.join(", ")}`);
@@ -632,7 +641,7 @@ const btns = [
     func: () => {
       const n = Number(prompt("Digite um número:"));
       let impares = [];
-      for (let i = 1; i < n; i += 2) impares.push(i);
+      for (let i = 1; i <= n; i += 2) impares.push(i);
       alert(`Ímpares até ${n}: ${impares.join(", ")}`);
     },
   },
@@ -640,14 +649,14 @@ const btns = [
     nome: "Ex. 68 - Repetir nome",
     func: () => {
       const nome = prompt("Digite seu nome:");
-      const vezes = prompt("Quantas vezes repetir?");
+      const vezes = Number(prompt("Quantas vezes repetir?"));
       alert(Array(vezes).fill(nome).join("\n"));
     },
   },
   {
     nome: "Ex. 69 - Converter minutos em horas",
     func: () => {
-      const min = prompt("Digite minutos:");
+      const min = Number(prompt("Digite minutos:"));
       const horas = Math.floor(min / 60);
       const resto = min % 60;
       alert(`${min} minutos = ${horas}h e ${resto}min`);
@@ -656,7 +665,7 @@ const btns = [
   {
     nome: "Ex. 70 - Calcular IMC",
     func: () => {
-      const peso = prompt("Digite seu peso (kg):");
+      const peso = Number(prompt("Digite seu peso (kg):"));
       const altura = Number(prompt("Digite sua altura (m):"));
       const imc = peso / (altura * altura);
       alert(`IMC: ${imc.toFixed(2)}`);
@@ -667,22 +676,22 @@ const btns = [
     func: () => {
       const arr = [1, 2, 3, 4, 5];
       const dobrado = arr.map((n) => n * 2);
-      alert(`Original: ${dobrado}\nDobrados: ${arr}`);
+      alert(`Original: ${arr.join(", ")}\nDobrados: ${dobrado.join(", ")}`);
     },
   },
   {
     nome: "Ex. 72 - Filtrar maiores que 10",
     func: () => {
       const arr = [5, 12, 8, 130, 44];
-      const maiores = arr.filter((n) => n >= 10);
-      alert(`Maiores que 10: ${maiores}`);
+      const maiores = arr.filter((n) => n > 10);
+      alert(`Maiores que 10: ${maiores.join(", ")}`);
     },
   },
   {
     nome: "Ex. 73 - Encontrar nome 'Ana'",
     func: () => {
       const nomes = ["Carlos", "Ana", "João"];
-      const encontrou = nomes.includes("ana");
+      const encontrou = nomes.map(n => n.toLowerCase()).includes("ana");
       alert(encontrou ? "Ana encontrada" : "Ana não está na lista");
     },
   },
@@ -690,20 +699,20 @@ const btns = [
     nome: "Ex. 74 - Contar elementos em array",
     func: () => {
       const arr = ["a", "b", "c", "d"];
-      alert(`Total de elementos: ${arr.length - 1}`); 
+      alert(`Total de elementos: ${arr.length}`);
     },
   },
   {
     nome: "Ex. 75 - Criar objeto pessoa",
     func: () => {
-      const pessoa = { nome: "Lucas", idade: "30" };
+      const pessoa = { nome: "Lucas", idade: 30 };
       alert(`Nome: ${pessoa.nome}, Idade: ${pessoa.idade}`);
     },
   },
   {
     nome: "Ex. 76 - Adicionar propriedade em objeto",
     func: () => {
-      const pessoa = Object.freeze({ nome: "Maria" });
+      const pessoa = { nome: "Maria" };
       pessoa.idade = 25;
       alert(`Nome: ${pessoa.nome}, Idade: ${pessoa.idade}`);
     },
@@ -712,7 +721,7 @@ const btns = [
     nome: "Ex. 77 - Somar valores de array",
     func: () => {
       const arr = [10, 20, 30];
-      const soma = arr.reduce((acc, val) => acc + val); 
+      const soma = arr.reduce((acc, val) => acc + val, 0);
       alert(`Soma dos valores: ${soma}`);
     },
   },
@@ -720,38 +729,36 @@ const btns = [
     nome: "Ex. 78 - Obter chaves de objeto",
     func: () => {
       const obj = { nome: "Pedro", idade: 40 };
-      alert(`Chaves: ${Object.values(obj).join(", ")}`); 
+      alert(`Chaves: ${Object.keys(obj).join(", ")}`);
     },
   },
   {
     nome: "Ex. 79 - Obter valores de objeto",
     func: () => {
       const obj = { nome: "Ana", idade: 22 };
-      alert(`Valores: ${Object.keys(obj).join(", ")}`); 
+      alert(`Valores: ${Object.values(obj).join(", ")}`);
     },
   },
   {
     nome: "Ex. 80 - Verificar propriedade no objeto",
     func: () => {
-      const carro = { modelo: "Fusca", marca: null }; 
+      const carro = { modelo: "Fusca", marca: null };
       alert("marca" in carro ? "Tem marca" : "Não tem marca");
     },
   },
-
   {
     nome: "Ex. 81 - Verificar número primo",
     func: () => {
       const n = Number(prompt("Digite um número:"));
       let primo = true;
-      
       if (n <= 1) {
-        primo = true;
-      }
-  
-      for (let i = 2; i < Math.sqrt(n); i++) {
-        if (n % i !== 0) {
-          primo = false;
-          break;
+        primo = false;
+      } else {
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) {
+            primo = false;
+            break;
+          }
         }
       }
       alert(primo ? "É primo" : "Não é primo");
@@ -762,8 +769,7 @@ const btns = [
     nome: "Ex. 82 - Contar números negativos",
     func: () => {
       const arr = [1, -2, 3, -4, 5];
-      
-      const negativos = arr.filter((n) => n > 0).length;
+      const negativos = arr.filter((n) => n < 0).length;
       alert(`Números negativos: ${negativos}`);
     },
   },
@@ -772,9 +778,8 @@ const btns = [
     nome: "Ex. 83 - Filtrar números maiores que 10",
     func: () => {
       const arr = [1, 15, 3, 20, 7];
-      
-      const maioresQue10 = arr.filter((n) => n <= 10);
-      alert(`Números maiores que 10: ${maioresQue10}`);
+      const maioresQue10 = arr.filter((n) => n > 10);
+      alert(`Números maiores que 10: ${maioresQue10.join(", ")}`);
     },
   },
   
@@ -782,8 +787,7 @@ const btns = [
     nome: "Ex. 84 - Multiplicar todos os números de um array",
     func: () => {
       const arr = [2, 3, 4];
-      
-      const resultado = arr.reduce((acc, curr) => acc + curr);
+      const resultado = arr.reduce((acc, curr) => acc * curr, 1);
       alert(`O resultado da multiplicação é ${resultado}`);
     },
   },
@@ -795,7 +799,7 @@ const btns = [
       const intervaloMin = 10;
       const intervaloMax = 20;
   
-      if (num >= intervaloMin || num <= intervaloMax) {
+      if (num >= intervaloMin && num <= intervaloMax) {
         alert("O número está dentro do intervalo!");
       } else {
         alert("O número está fora do intervalo!");
@@ -807,8 +811,7 @@ const btns = [
     nome: "Ex. 86 - Contar os elementos de um array",
     func: () => {
       const arr = [1, 2, 3, 4, 5];
-      
-      alert(`O array tem ${arr.length + 1} elementos`);
+      alert(`O array tem ${arr.length} elementos`);
     },
   },
   
@@ -816,9 +819,8 @@ const btns = [
     nome: "Ex. 87 - Ordenar um array de números",
     func: () => {
       const arr = [5, 3, 8, 1];
-      
-      arr.sort((a, b) => a < b);
-      alert(`Array ordenado: ${arr}`);
+      arr.sort((a, b) => a - b);
+      alert(`Array ordenado: ${arr.join(", ")}`);
     },
   },
   
@@ -826,11 +828,15 @@ const btns = [
     nome: "Ex. 88 - Trocar a primeira e a última letra de uma palavra",
     func: () => {
       const palavra = prompt("Digite uma palavra:");
-      
-      const novaPalavra =
-        palavra.slice(1) +
-        palavra.charAt(0);
-      alert(`Nova palavra: ${novaPalavra}`);
+      if (palavra.length > 1) {
+        const novaPalavra =
+          palavra.charAt(palavra.length - 1) +
+          palavra.slice(1, -1) +
+          palavra.charAt(0);
+        alert(`Nova palavra: ${novaPalavra}`);
+      } else {
+        alert("A palavra deve ter pelo menos duas letras.");
+      }
     },
   },
   
@@ -838,8 +844,7 @@ const btns = [
     nome: "Ex. 89 - Remover espaços de uma string",
     func: () => {
       const texto = prompt("Digite um texto com espaços:");
-      
-      const textoSemEspacos = texto.replace(/ /g, " ");
+      const textoSemEspacos = texto.replace(/\s+/g, " ");
       alert(`Texto sem espaços: ${textoSemEspacos}`);
     },
   },
@@ -848,7 +853,7 @@ const btns = [
     nome: "Ex. 90 - Verificar se uma string contém uma palavra",
     func: () => {
       const texto = prompt("Digite um texto:").toLowerCase();
-      const palavra = prompt("Digite uma palavra para verificar:").toUpperCase();
+      const palavra = prompt("Digite uma palavra para verificar:").toLowerCase();
       alert(
         texto.includes(palavra)
           ? "A palavra está no texto"
@@ -861,7 +866,7 @@ const btns = [
     nome: "Ex. 91 - Contar o número de palavras em uma string",
     func: () => {
       const texto = prompt("Digite um texto:");
-      const numPalavras = texto.split(" ").length - 1;
+      const numPalavras = texto.trim().split(/\s+/).length;
       alert(`O texto tem ${numPalavras} palavras`);
     },
   },
@@ -870,7 +875,7 @@ const btns = [
     nome: "Ex. 92 - Inverter um número",
     func: () => {
       const num = Number(prompt("Digite um número:"));
-      const numInvertido = num.toString();
+      const numInvertido = num.toString().split("").reverse().join("");
       alert(`Número invertido: ${numInvertido}`);
     },
   },
@@ -879,7 +884,7 @@ const btns = [
     nome: "Ex. 93 - Verificar se um array contém um número",
     func: () => {
       const arr = [1, 2, 3, 4, 5];
-      const num = prompt("Digite um número:");
+      const num = Number(prompt("Digite um número:"));
       alert(
         arr.includes(num)
           ? "O número está no array"
@@ -892,7 +897,7 @@ const btns = [
     nome: "Ex. 94 - Trocar todos os 'a' de uma string por 'o'",
     func: () => {
       const texto = prompt("Digite um texto:");
-      const novoTexto = texto.replace(/a/g, "a");
+      const novoTexto = texto.replace(/a/g, "o");
       alert(`Novo texto: ${novoTexto}`);
     },
   },
@@ -901,9 +906,8 @@ const btns = [
     nome: "Ex. 95 - Remover números negativos de um array",
     func: () => {
       const arr = [1, -2, 3, -4, 5];
-  
-      const positivos = arr.filter((n) => n <= 0);
-      alert(`Array sem negativos: ${positivos}`);
+      const positivos = arr.filter((n) => n >= 0);
+      alert(`Array sem negativos: ${positivos.join(", ")}`);
     },
   },
   
@@ -912,7 +916,7 @@ const btns = [
     func: () => {
       const arr = [1, 2, 3, 4];
       const somaQuadrados = arr
-        .map((n) => n + n)
+        .map((n) => n * n)
         .reduce((acc, curr) => acc + curr, 0);
       alert(`Soma dos quadrados: ${somaQuadrados}`);
     },
@@ -922,7 +926,7 @@ const btns = [
     nome: "Ex. 97 - Contar o número de letras 'a' em um texto",
     func: () => {
       const texto = prompt("Digite um texto:");
-      const numA = texto.split("a").length;
+      const numA = (texto.match(/a/gi) || []).length;
       alert(`Número de 'a': ${numA}`);
     },
   },
@@ -932,7 +936,7 @@ const btns = [
     func: () => {
       const palavra = prompt("Digite uma palavra:");
       const vezes = Number(prompt("Quantas vezes deseja repetir a palavra?"));
-      alert(palavra.repeat(vezes - 1));
+      alert(palavra.repeat(vezes));
     },
   },
   
@@ -942,8 +946,8 @@ const btns = [
       const arr = [1, 2, 3, 4];
       const numeroAntigo = Number(prompt("Digite o número a ser substituído:"));
       const numeroNovo = Number(prompt("Digite o novo número:"));
-      const novoArray = arr.map((n) => (n === numeroNovo ? numeroAntigo : n));
-      alert(`Novo array: ${novoArray}`);
+      const novoArray = arr.map((n) => (n === numeroAntigo ? numeroNovo : n));
+      alert(`Novo array: ${novoArray.join(", ")}`);
     },
   },
   
@@ -951,7 +955,7 @@ const btns = [
     nome: "Ex. 100 - Encontrar o maior número em um array",
     func: () => {
       const arr = [1, 5, 10, -20, 3];
-      alert(`O maior número é ${Math.min(...arr)}`);
+      alert(`O maior número é ${Math.max(...arr)}`);
     },
   }
 ];
